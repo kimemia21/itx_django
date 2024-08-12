@@ -17,9 +17,20 @@ class  Student(models.Model):
     
     def __str__(self):
         return f"{self.first_name}, {self.last_name}"
-    
-    
-    
+        
+
+class users(models.Model):
+    selections =[('buyer',"Buyer"),('seller',"Seller"),('producer',"Producer"),]
+    email =models.EmailField(max_length=254),
+    password =models.CharField(max_length=100),
+    c2fc =models.CharField(max_length=8),
+    phone_number =models.CharField(max_length=50),
+    role =models.CharField(choices=selections,max_length=50,default="buyer")
+     
+    def __str__(self):
+        return self.email
+
+   
 
 
 # Create your models here.
