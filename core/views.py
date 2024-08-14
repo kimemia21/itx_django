@@ -2,8 +2,11 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import Http404
-from .models import Student
+from django.shortcuts import get_object_or_404
+from .models import Student,user
 from .Serializers import StudentSeriailizer
+from  django.contrib.auth.models import User
+
 
 class StudentApiView(APIView):
     def get_object(self,pk):
@@ -45,6 +48,26 @@ class StudentApiView(APIView):
             return Response({"message":"user deleted"})
         else:
             return Response(serializer.errors)     
+        
+        
+ 
+class Login(APIView):
+    def get(request):
+        data =request.data
+        try:
+            User =user.objects.get(email=data.get("email"))
+            
+            
+        
+            
+        except user.DoesNotExist:
+            return Response({"not found":data["email"]}, Http404)
+        
+    
+                 
+        
+        
+        
         
         
         
